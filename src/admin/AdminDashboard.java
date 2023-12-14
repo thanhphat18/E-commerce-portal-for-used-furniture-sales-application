@@ -265,6 +265,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jButton4.setText("Manage Products");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -273,6 +278,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jButton5.setText("Manage Users");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -281,6 +291,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jButton6.setText("Add Suppliers");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -289,6 +304,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jButton7.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jButton7.setText("Manage Suppliers");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -297,6 +317,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jButton8.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jButton8.setText("Select Suppliers");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -305,6 +330,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jButton9.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jButton9.setText("Transaction");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -447,6 +477,47 @@ public class AdminDashboard extends javax.swing.JFrame {
         category.setVisible(true);
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        jButton4.setBackground(selectionColor);
+        Product product = new Product();
+        product.setVisible(true);
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        jButton5.setBackground(selectionColor);
+        ManageUsers manageUsers = new ManageUsers();
+        manageUsers.setVisible(true);
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+        jButton6.setBackground(selectionColor);
+        AddSupplier addSupplier = new AddSupplier();
+        addSupplier.setVisible(true);
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        jButton7.setBackground(selectionColor);
+        ManageSuppliers manageSuppliers = new ManageSuppliers();
+        manageSuppliers.setVisible(true);
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        jButton8.setBackground(selectionColor);
+        SelectSuppliers selectSuppliers = new SelectSuppliers();
+        selectSuppliers.setVisible(true);
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        // TODO add your handling code here:
+        jButton9.setBackground(selectionColor);
+        Transaction transaction = new Transaction();
+        transaction.setVisible(true);
+    }//GEN-LAST:event_jButton9MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -484,12 +555,12 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    public static javax.swing.JButton jButton4;
+    public static javax.swing.JButton jButton5;
+    public static javax.swing.JButton jButton6;
+    public static javax.swing.JButton jButton7;
+    public static javax.swing.JButton jButton8;
+    public static javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

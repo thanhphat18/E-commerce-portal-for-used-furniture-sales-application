@@ -4,12 +4,15 @@
  */
 package admin;
 
+import java.awt.Color;
+
 /**
  *
  * @author thanhphatchau
  */
 public class SelectSuppliers extends javax.swing.JFrame {
-
+    
+    Color primaryColor = new Color(255,255,255);
     /**
      * Creates new form SelectSuppliers
      */
@@ -150,7 +153,8 @@ public class SelectSuppliers extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        setVisible(false);
+        AdminDashboard.jButton8.setBackground(primaryColor);
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
