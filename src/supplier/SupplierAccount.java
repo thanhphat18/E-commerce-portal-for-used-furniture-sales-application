@@ -4,12 +4,15 @@
  */
 package supplier;
 
+import java.awt.Color;
+
 /**
  *
  * @author thanhphatchau
  */
 public class SupplierAccount extends javax.swing.JFrame {
-
+    
+    Color primaryColor = new Color(255,255,255);
     /**
      * Creates new form SupplierAccount
      */
@@ -189,8 +192,8 @@ public class SupplierAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
+        setVisible(false);
+        SupplierDashboard.jButton1.setBackground(primaryColor);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

@@ -44,7 +44,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("iCiel Gotham", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("mail:");
+        jLabel2.setText("Email:");
 
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
