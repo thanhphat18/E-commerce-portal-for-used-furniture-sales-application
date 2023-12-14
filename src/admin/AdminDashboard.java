@@ -81,6 +81,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("admin@gmail.com");
+        jTextField1.setEnabled(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);

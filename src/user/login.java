@@ -4,6 +4,17 @@
  */
 package user;
 
+import supplier.SupplierDashboard;
+import admin.AdminDashboard;
+
+import javax.swing.JOptionPane;
+import connection.MyConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author thanhphatchau
@@ -80,6 +91,11 @@ public class login extends javax.swing.JFrame {
 
         jLabel5.setText("Forgot password?");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jRadioButton1.setText("Buyer");
         jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -107,6 +123,11 @@ public class login extends javax.swing.JFrame {
 
         jLabel6.setText("Sign up");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("X");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,9 +237,86 @@ public class login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private boolean isEmpty(){
+        if(jTextField1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Email address is required", "Warning", 2);
+            return false;
+        }if (!jTextField1.getText().matches("^.+@.+\\..+$")){
+            JOptionPane.showMessageDialog(this, "Invalid email address", "Warning", 2);
+            return false;
+        }
+        if(jTextField2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Password is required", "Warning", 2);
+            return false;
+        }
+        
+        return true;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(isEmpty()){
+            String email = jTextField1.getText();
+            String password = jTextField2.getText();
+            if(jRadioButton1.isSelected()){
+                try {
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from buyer where uemail =? and upassword =?");
+                    ps.setString(1, email);
+                    ps.setString(2, password);
+                    ResultSet rs = ps.executeQuery();
+                    if(rs.next()){
+                        UserDashboard ud = new UserDashboard();
+                        ud.setVisible(true);
+                        ud.pack();
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if(jRadioButton2.isSelected()){
+                try {
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from seller where semail =? and spassword =?");
+                    ps.setString(1, email);
+                    ps.setString(2, password);
+                    ResultSet rs = ps.executeQuery();
+                    if(rs.next()){
+                        SupplierDashboard sd = new SupplierDashboard();
+                        sd.setVisible(true);
+                        sd.pack();
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                 try {
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from admin where email =? and password =?");
+                    ps.setString(1, email);
+                    ps.setString(2, password);
+                    ResultSet rs = ps.executeQuery();
+                    if(rs.next()){
+                        AdminDashboard ad = new AdminDashboard();
+                        ad.setVisible(true);
+                        ad.pack();
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -241,6 +339,16 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        new signup().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        new ForgotPassword().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
