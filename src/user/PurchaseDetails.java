@@ -4,12 +4,15 @@
  */
 package user;
 
+import java.awt.Color;
+
 /**
  *
  * @author thanhphatchau
  */
 public class PurchaseDetails extends javax.swing.JFrame {
-
+    
+    Color primaryColor = new Color(255,255,255);
     /**
      * Creates new form PurchaseDetails
      */
@@ -183,8 +186,8 @@ public class PurchaseDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
+        setVisible(false);
+        UserDashboard.jButton2.setBackground(primaryColor);
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
