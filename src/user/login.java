@@ -4,6 +4,17 @@
  */
 package user;
 
+import supplier.SupplierDashboard;
+import admin.AdminDashboard;
+
+import javax.swing.JOptionPane;
+import connection.MyConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author thanhphatchau
@@ -36,7 +47,6 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -78,9 +88,6 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Forgot password?");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jRadioButton1.setText("Buyer");
         jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +114,11 @@ public class login extends javax.swing.JFrame {
 
         jLabel6.setText("Sign up");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("X");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,19 +140,17 @@ public class login extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(136, 136, 136)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jRadioButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRadioButton2)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(jRadioButton3)))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton2)
+                                .addGap(37, 37, 37)
+                                .addComponent(jRadioButton3))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -173,9 +183,7 @@ public class login extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(4, 4, 4)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
@@ -216,9 +224,106 @@ public class login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private boolean isEmpty(){
+        if(jTextField1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Username is required", "Warning", 2);
+            return false;
+        }
+        if(jTextField2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Password is required", "Warning", 2);
+            return false;
+        }
+        
+        if((jRadioButton1.isSelected() && jRadioButton2.isSelected()) || (jRadioButton1.isSelected() && jRadioButton3.isSelected())
+                || (jRadioButton2.isSelected() && jRadioButton3.isSelected()) 
+                || (jRadioButton3.isSelected() && jRadioButton1.isSelected() && jRadioButton2.isSelected())){
+            JOptionPane.showMessageDialog(this, "JUST ONE ROLE", "Warning", 2);
+            return false;
+        }
+        
+        if(!jRadioButton1.isSelected() && !jRadioButton2.isSelected() && !jRadioButton3.isSelected() ){
+            JOptionPane.showMessageDialog(this, "CHOOSE YOUR ROLE", "Warning", 2);
+            return false;
+        }
+        
+        return true;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(isEmpty()){
+            String username = jTextField1.getText();
+            String password = jTextField2.getText();
+            String type = "";
+            
+            if(jRadioButton1.isSelected()){
+                try {
+                    type = "buyer";
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from account where username =? and password =? and acc_type =?" );
+                    ps.setString(1, username);
+                    ps.setString(2, password);
+                    ps.setString(3,type);
+                    ResultSet rs = ps.executeQuery();
+                    if(rs.next()){
+                        UserDashboard ud = new UserDashboard();
+                        ud.setVisible(true);
+                        ud.pack();
+                        UserDashboard.userName.setText(username);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if(jRadioButton2.isSelected()){
+                try {
+                    type = "seller";
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from account where username =? and password =? and acc_type =?");
+                    ps.setString(1, username);
+                    ps.setString(2, password);
+                    ps.setString(3,type);
+                    ResultSet rs = ps.executeQuery();
+                    if(rs.next()){
+                        SupplierDashboard sd = new SupplierDashboard();
+                        sd.setVisible(true);
+                        sd.pack();
+                        SupplierDashboard.userName.setText(username);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                 try {
+                    type = "admin";
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from account where username =? and password =? and acc_type =?");
+                    ps.setString(1, username);
+                    ps.setString(2, password);
+                    ps.setString(3,type);
+                    ResultSet rs = ps.executeQuery();
+                    if(rs.next()){
+                        AdminDashboard ad = new AdminDashboard();
+                        ad.setVisible(true);
+                        ad.pack();
+                        AdminDashboard.userName.setText(username);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -241,6 +346,11 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        new signup_account().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -283,7 +393,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
