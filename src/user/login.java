@@ -4,7 +4,7 @@
  */
 package user;
 
-import supplier.SupplierDashboard;
+import seller.SellerDashboard;
 import admin.AdminDashboard;
 
 import javax.swing.JOptionPane;
@@ -289,10 +289,10 @@ public class login extends javax.swing.JFrame {
                     ps.setString(3,type);
                     ResultSet rs = ps.executeQuery();
                     if(rs.next()){
-                        SupplierDashboard sd = new SupplierDashboard();
+                        SellerDashboard sd = new SellerDashboard();
                         sd.setVisible(true);
                         sd.pack();
-                        SupplierDashboard.userName.setText(username);
+                        SellerDashboard.userName.setText(username);
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);

@@ -41,6 +41,24 @@ public class CategoryDao {
         return row + 1;
     }
     
+    //get category values
+    public String[] getCategoryValue(int id){
+        String[] value = new String[2];
+        try{
+            ps = con.prepareStatement("select * from category where cid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                value[0] = rs.getString(1);
+                value[1] = rs.getString(2);
+             
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return value;
+    }
+    
     //check category already exists
     public boolean isCategoryExists(String cname){
         
@@ -140,5 +158,21 @@ public class CategoryDao {
                 Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    //get category id
+    public int getCategoryId(String cname){
+        int id = 0;
+        try{
+            ps = con.prepareStatement("select cid from category where cname =?");
+            ps.setString(1, cname);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 }

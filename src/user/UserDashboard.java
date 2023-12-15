@@ -36,7 +36,6 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         userName = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -106,18 +105,6 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(43, 68, 76));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("My Account");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Purchase Details");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,13 +173,11 @@ public class UserDashboard extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
                                 .addComponent(jButton3)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addGap(25, 25, 25))
+                                .addGap(135, 135, 135))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
@@ -206,7 +191,6 @@ public class UserDashboard extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addContainerGap())
@@ -288,10 +272,6 @@ public class UserDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -311,12 +291,6 @@ public class UserDashboard extends javax.swing.JFrame {
         PurchaseDetails purchaseDetails = new PurchaseDetails();
         purchaseDetails.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        jButton1.setBackground(selectionColor);
-        UserAccount userAccount = new UserAccount();
-        userAccount.setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -354,7 +328,6 @@ public class UserDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton jButton1;
     public static javax.swing.JButton jButton2;
     public static javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

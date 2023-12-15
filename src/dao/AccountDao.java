@@ -86,4 +86,20 @@ public class AccountDao {
             Logger.getLogger(AccountDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    //get buyer id
+    public int getAccountId(String username){
+        int id = 0;
+        try{
+            ps = con.prepareStatement("select acc_id from account where username =?");
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(AccountDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 }

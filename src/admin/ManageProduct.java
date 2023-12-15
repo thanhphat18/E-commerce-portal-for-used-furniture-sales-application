@@ -4,7 +4,11 @@
  */
 package admin;
 
+import dao.CategoryDao;
+import dao.ProductDao;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,12 +17,17 @@ import java.awt.Color;
 public class ManageProduct extends javax.swing.JFrame {
     
     Color primaryColor = new Color(255,255,255);
+    ProductDao product = new ProductDao();
+    CategoryDao category = new CategoryDao();
+
+    String[] categories;
 
     /**
      * Creates new form Product
      */
     public ManageProduct() {
         initComponents();
+        init();
     }
 
     /**
@@ -138,6 +147,12 @@ public class ManageProduct extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Quantity:");
 
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Price:");
@@ -240,7 +255,57 @@ public class ManageProduct extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void init(){
+//        jTextField2.setText(String.valueOf(product.getMaxRow()));
+//        categories = new String[product.countCategories()];
+//        setCat();
+    }
+    
+    private void productTable(){
+        //product.getCatgoryValue(jTable2, "");
+//        model = (DefaultTableModel) jTable2.getModel();
+//        jTable2.setRowHeight(30);
+//        jTable2.setShowGrid(true);
+//        jTable2.setGridColor(Color.BLACK);
+//        jTable2.setBackground(Color.WHITE);
+//        jTable2.setSelectionBackground(Color.LIGHT_GRAY);
+    }
+    
+    private void setCat(){
+//        categories = product.getCat();
+//        for(String s : categories){
+//            System.out.print(s);
+//            jComboBox1.addItem(s);
+//        }
+    }
+    
+    private void clear(){
+//        jTextField1.setText("");
+//        jTextField2.setText(String.valueOf(product.getMaxRow()));
+//        jTextField3.setText("");
+//        jTextField5.setText("0");
+//        jTextField6.setText("0.0");
+//        jTable2.clearSelection();
+//        
+    }
+    
+//    private boolean isEmpty(){
+////        if(jTextField3.getText().isEmpty()){
+////            JOptionPane.showMessageDialog(this, "Product name is required", "Warning", 2);
+////            return false;
+////        }
+////        if(Integer.parseInt(jTextField5.getText()) <= 0){
+////            JOptionPane.showMessageDialog(this, "Incorrect value", "Warning", 2);
+////            return false;
+////        }
+////        if(jTextField6.getText().equals("0.0")){
+////            JOptionPane.showMessageDialog(this, "Product price is required", "Warning", 2);
+////            return false;
+////        }
+//        return true;
+//} 
+    
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         setVisible(false);
@@ -248,7 +313,8 @@ public class ManageProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -263,6 +329,22 @@ public class ManageProduct extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField5KeyTyped
+    
+    private boolean isNumeric(String s){
+        try{
+            double d = Double.parseDouble(s);
+            return true;
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, ""+ex + "\nNumeric value is required!(price field)");
+        }
+        return false;
+    }
+    
     /**
      * @param args the command line arguments
      */

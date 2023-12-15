@@ -54,10 +54,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -277,58 +273,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
-        jButton5.setText("Manage Users");
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
-            }
-        });
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
-        jButton6.setText("Add Suppliers");
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton6MouseClicked(evt);
-            }
-        });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
-        jButton7.setText("Manage Suppliers");
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton7MouseClicked(evt);
-            }
-        });
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
-        jButton8.setText("Select Suppliers");
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton8MouseClicked(evt);
-            }
-        });
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
         jButton9.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jButton9.setText("Transaction");
         jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,10 +294,6 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
@@ -365,17 +305,9 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(422, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -452,22 +384,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -483,34 +399,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         ManageProduct product = new ManageProduct();
         product.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
-
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        // TODO add your handling code here:
-        jButton5.setBackground(selectionColor);
-        ManageUsers manageUsers = new ManageUsers();
-        manageUsers.setVisible(true);
-    }//GEN-LAST:event_jButton5MouseClicked
-
-    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        // TODO add your handling code here:
-        jButton6.setBackground(selectionColor);
-        AddSupplier addSupplier = new AddSupplier();
-        addSupplier.setVisible(true);
-    }//GEN-LAST:event_jButton6MouseClicked
-
-    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-        // TODO add your handling code here:
-        jButton7.setBackground(selectionColor);
-        ManageSuppliers manageSuppliers = new ManageSuppliers();
-        manageSuppliers.setVisible(true);
-    }//GEN-LAST:event_jButton7MouseClicked
-
-    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
-        // TODO add your handling code here:
-        jButton8.setBackground(selectionColor);
-        SelectSuppliers selectSuppliers = new SelectSuppliers();
-        selectSuppliers.setVisible(true);
-    }//GEN-LAST:event_jButton8MouseClicked
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
@@ -557,10 +445,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jButton3;
     public static javax.swing.JButton jButton4;
-    public static javax.swing.JButton jButton5;
-    public static javax.swing.JButton jButton6;
-    public static javax.swing.JButton jButton7;
-    public static javax.swing.JButton jButton8;
     public static javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

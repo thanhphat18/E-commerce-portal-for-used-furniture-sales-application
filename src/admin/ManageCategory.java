@@ -242,7 +242,6 @@ public class ManageCategory extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Category name is required", "Warning", 2);
             return false;
         }
-        
         return true;
     }
     
@@ -256,7 +255,6 @@ public class ManageCategory extends javax.swing.JFrame {
                 boolean x = cat.isCategoryExists(newCategory);
                 if(x){
                     JOptionPane.showMessageDialog(this,"This category name is already exists", "Warning", 2);
-                    
                 }
                 return x;
             }
