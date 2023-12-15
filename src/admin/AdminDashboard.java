@@ -480,7 +480,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         jButton4.setBackground(selectionColor);
-        Product product = new Product();
+        ManageProduct product = new ManageProduct();
         product.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 

@@ -57,6 +57,22 @@ public class CategoryDao {
         return false;
     }
     
+    //check category already exists
+    public boolean isIDExists(int id){
+        
+        try {
+            ps = con.prepareStatement("select * from category where cid =? ");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     //insert data into category table
     public void insert(int id, String cname){
         String sql = "insert into category values(?,?)";
@@ -92,6 +108,37 @@ public class CategoryDao {
             }
         }catch(SQLException ex){
             Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //update category data
+    public void update(int id, String cname){
+        String sql = "update category set cname = ? where cid = ?";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cname);
+            ps.setInt(2,id);
+            if(ps.executeUpdate() > 0){
+                JOptionPane.showMessageDialog(null, "Category succesffuly updated");
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //delete category
+    public void delete(int id){
+        int x = JOptionPane.showConfirmDialog(null,"Are you sure to delete this account?","Delete Category", 2);
+        if(x == JOptionPane.OK_OPTION){
+            try{
+                ps = con.prepareStatement("delete from category where cid =? ");
+                ps.setInt(1, id);
+                if(ps.executeUpdate() > 0){
+                    JOptionPane.showMessageDialog(null,"Category deleted");
+                }
+            }catch(SQLException ex){
+                Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
