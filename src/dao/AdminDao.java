@@ -39,16 +39,18 @@ public class AdminDao {
         return row + 1;
     }
     
-    //insert data into buyer table
+    //insert data into admin table
     public void insert(int id, String email, int account_id){
-        String sql = "insert into admin values(?,?,?,?)";
+        String sql = "insert into admin(aid, email, acc_id) values(?,?,?)";
         try{
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.setString(2,email);
             ps.setInt(3,account_id);
             if(ps.executeUpdate() > 0){
-                JOptionPane.showMessageDialog(null, "Stored");
+                JOptionPane.showMessageDialog(null, "Completed");
+            }else{
+                JOptionPane.showMessageDialog(null, "Cannot stored");
             }
         }catch(SQLException ex){
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);

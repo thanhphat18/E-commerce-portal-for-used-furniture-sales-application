@@ -47,11 +47,13 @@ public class SellerDao {
             ps.setInt(1, id);
             ps.setString(2,email);
             ps.setString(3,phone);
-            ps.setInt(5, acc_id);
             ps.setString(4, address);
+            ps.setInt(5, acc_id);
             ps.setString(6, name);
             if(ps.executeUpdate() > 0){
-                JOptionPane.showMessageDialog(null, "Stored");
+                JOptionPane.showMessageDialog(null, "Completed");
+            }else{
+                JOptionPane.showMessageDialog(null, "Cannot stored");
             }
         }catch(SQLException ex){
             Logger.getLogger(SellerDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -54,7 +54,7 @@ public class AccountDao {
         return false;
     }
     
-    //insert data into buyer table
+    //insert data into account table
     public void insert(int id, String username, String password, String type){
         String sql = "insert into account values(?,?,?,?)";
         try{
@@ -64,7 +64,9 @@ public class AccountDao {
             ps.setString(3,password);
             ps.setString(4, type);
             if(ps.executeUpdate() > 0){
-                JOptionPane.showMessageDialog(null, "Stored");
+                JOptionPane.showMessageDialog(null, "Stored temporary account");
+            }else{
+                JOptionPane.showMessageDialog(null, "Cannot stored");
             }
         }catch(SQLException ex){
             Logger.getLogger(AccountDao.class.getName()).log(Level.SEVERE, null, ex);

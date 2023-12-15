@@ -50,7 +50,9 @@ public class BuyerDao {
             ps.setString(5, phone);
             ps.setString(6, name);
             if(ps.executeUpdate() > 0){
-                JOptionPane.showMessageDialog(null, "Stored");
+                JOptionPane.showMessageDialog(null, "Completed");
+            }else{
+                JOptionPane.showMessageDialog(null, "Cannot stored");
             }
         }catch(SQLException ex){
             Logger.getLogger(BuyerDao.class.getName()).log(Level.SEVERE, null, ex);

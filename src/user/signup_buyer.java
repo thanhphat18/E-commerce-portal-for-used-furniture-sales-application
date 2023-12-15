@@ -241,8 +241,11 @@ public class signup_buyer extends javax.swing.JFrame {
     }
     
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        
         int account_id = Integer.parseInt(String.valueOf(account.getMaxRow() - 1));
         account.delete(account_id);
+        new signup_account().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -267,8 +270,7 @@ public class signup_buyer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
-        new signup_account().setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnBackMouseClicked
 
     /**

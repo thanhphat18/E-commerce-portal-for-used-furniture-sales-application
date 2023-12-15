@@ -270,6 +270,7 @@ public class login extends javax.swing.JFrame {
                         UserDashboard ud = new UserDashboard();
                         ud.setVisible(true);
                         ud.pack();
+                        UserDashboard.userName.setText(username);
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
@@ -291,6 +292,7 @@ public class login extends javax.swing.JFrame {
                         SupplierDashboard sd = new SupplierDashboard();
                         sd.setVisible(true);
                         sd.pack();
+                        SupplierDashboard.userName.setText(username);
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
@@ -312,6 +314,7 @@ public class login extends javax.swing.JFrame {
                         AdminDashboard ad = new AdminDashboard();
                         ad.setVisible(true);
                         ad.pack();
+                        AdminDashboard.userName.setText(username);
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
