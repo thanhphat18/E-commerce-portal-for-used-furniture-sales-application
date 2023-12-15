@@ -5,20 +5,25 @@
 package admin;
 
 import java.awt.Color;
+import dao.CategoryDao;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author thanhphatchau
  */
-public class Category extends javax.swing.JFrame {
+public class ManageCategory extends javax.swing.JFrame {
     
     Color primaryColor = new Color(255,255,255);
-
+    CategoryDao cat = new CategoryDao();
+    DefaultTableModel model;
     /**
      * Creates new form Category
      */
-    public Category() {
+    public ManageCategory() {
         initComponents();
+        init();
     }
 
     /**
@@ -79,6 +84,8 @@ public class Category extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Search Product:");
+
+        jTextField2.setEditable(false);
 
         jLabel2.setFont(new java.awt.Font("iCiel Gotham", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,7 +190,40 @@ public class Category extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void init(){
+        jTextField2.setText(String.valueOf(cat.getMaxRow()));
+        categoryTable();
+        
+    }
+    
+    private void categoryTable(){
+        cat.getCatgoryValue(jTable2, "");
+        model = (DefaultTableModel) jTable2.getModel();
+        jTable2.setRowHeight(30);
+        jTable2.setShowGrid(true);
+        jTable2.setGridColor(Color.BLACK);
+        jTable2.setBackground(Color.WHITE);
+        jTable2.setSelectionBackground(Color.LIGHT_GRAY);
+    }
+    
+    private void clear(){
+        jTextField1.setText("");
+        jTextField2.setText(String.valueOf(cat.getMaxRow()));
+        jTextField3.setText("");
+        jTable2.clearSelection();
+        
+    }
+    
+    private boolean isEmpty(){
+        if(jTextField3.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Category name is required", "Warning", 2);
+            return false;
+        }
+        
+        return true;
+    }
+    
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         setVisible(false);
@@ -191,7 +231,19 @@ public class Category extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(isEmpty()){
+            int id  = Integer.parseInt(jTextField2.getText());
+            String cname = jTextField3.getText();
+            if(!cat.isCategoryExists(cname)){
+                cat.insert(id, cname);
+                jTable2.setModel(new DefaultTableModel(null, new Object[]{"Category ID","Category Name"}));
+                cat.getCatgoryValue(jTable2, "");
+                clear();
+            }else{
+                JOptionPane.showMessageDialog(this, "Category name is already exists", "Warning", 2);
+            }
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -211,20 +263,21 @@ public class Category extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Category().setVisible(true);
+                new ManageCategory().setVisible(true);
             }
         });
     }

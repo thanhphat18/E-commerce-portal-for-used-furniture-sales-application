@@ -474,7 +474,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         jButton3.setBackground(selectionColor);
-        Category category = new Category();
+        ManageCategory category = new ManageCategory();
         category.setVisible(true);
     }//GEN-LAST:event_jButton3MouseClicked
 
