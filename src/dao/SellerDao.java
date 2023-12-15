@@ -39,6 +39,27 @@ public class SellerDao {
         return row + 1;
     }
     
+    //get seller values
+    public String[] getUserValue(int id){
+        String[] value = new String[6];
+        try{
+            ps = con.prepareStatement("select * from seller where sid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                value[0] = rs.getString(1);
+                value[1] = rs.getString(2);
+                value[2] = rs.getString(3);
+                value[3] = rs.getString(4);
+                value[4] = rs.getString(5);
+                value[5] = rs.getString(6);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(SellerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return value;
+    }
+    
     //insert data into seller table
     public void insert(int id, String email, String phone, String address, int acc_id, String name){
         String sql = "insert into seller values(?,?,?,?,?,?)";
@@ -58,5 +79,21 @@ public class SellerDao {
         }catch(SQLException ex){
             Logger.getLogger(SellerDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    //get seller id
+    public int getUserId(int accountId){
+        int id = 0;
+        try{
+            ps = con.prepareStatement("select sid from seller where acc_id =?");
+            ps.setInt(1, accountId);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(SellerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 }
