@@ -47,7 +47,6 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -86,14 +85,6 @@ public class login extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Forgot password?");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
             }
         });
 
@@ -149,19 +140,17 @@ public class login extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(136, 136, 136)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jRadioButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRadioButton2)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(jRadioButton3)))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton2)
+                                .addGap(37, 37, 37)
+                                .addComponent(jRadioButton3))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -194,9 +183,7 @@ public class login extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(4, 4, 4)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
@@ -240,14 +227,23 @@ public class login extends javax.swing.JFrame {
     
     private boolean isEmpty(){
         if(jTextField1.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Email address is required", "Warning", 2);
-            return false;
-        }if (!jTextField1.getText().matches("^.+@.+\\..+$")){
-            JOptionPane.showMessageDialog(this, "Invalid email address", "Warning", 2);
+            JOptionPane.showMessageDialog(this, "Username is required", "Warning", 2);
             return false;
         }
         if(jTextField2.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Password is required", "Warning", 2);
+            return false;
+        }
+        
+        if((jRadioButton1.isSelected() && jRadioButton2.isSelected()) || (jRadioButton1.isSelected() && jRadioButton3.isSelected())
+                || (jRadioButton2.isSelected() && jRadioButton3.isSelected()) 
+                || (jRadioButton3.isSelected() && jRadioButton1.isSelected() && jRadioButton2.isSelected())){
+            JOptionPane.showMessageDialog(this, "JUST ONE ROLE", "Warning", 2);
+            return false;
+        }
+        
+        if(!jRadioButton1.isSelected() && !jRadioButton2.isSelected() && !jRadioButton3.isSelected() ){
+            JOptionPane.showMessageDialog(this, "CHOOSE YOUR ROLE", "Warning", 2);
             return false;
         }
         
@@ -256,15 +252,19 @@ public class login extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(isEmpty()){
-            String email = jTextField1.getText();
+            String username = jTextField1.getText();
             String password = jTextField2.getText();
+            String type = "";
+            
             if(jRadioButton1.isSelected()){
                 try {
+                    type = "buyer";
                     Connection con = MyConnection.getConnection();
                     PreparedStatement ps;
-                    ps = con.prepareStatement("select * from buyer where uemail =? and upassword =?");
-                    ps.setString(1, email);
+                    ps = con.prepareStatement("select * from account where username =? and password =? and acc_type =?" );
+                    ps.setString(1, username);
                     ps.setString(2, password);
+                    ps.setString(3,type);
                     ResultSet rs = ps.executeQuery();
                     if(rs.next()){
                         UserDashboard ud = new UserDashboard();
@@ -272,18 +272,20 @@ public class login extends javax.swing.JFrame {
                         ud.pack();
                         this.dispose();
                     }else{
-                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                        JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if(jRadioButton2.isSelected()){
                 try {
+                    type = "seller";
                     Connection con = MyConnection.getConnection();
                     PreparedStatement ps;
-                    ps = con.prepareStatement("select * from seller where semail =? and spassword =?");
-                    ps.setString(1, email);
+                    ps = con.prepareStatement("select * from account where username =? and password =? and acc_type =?");
+                    ps.setString(1, username);
                     ps.setString(2, password);
+                    ps.setString(3,type);
                     ResultSet rs = ps.executeQuery();
                     if(rs.next()){
                         SupplierDashboard sd = new SupplierDashboard();
@@ -291,18 +293,20 @@ public class login extends javax.swing.JFrame {
                         sd.pack();
                         this.dispose();
                     }else{
-                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                        JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{
                  try {
+                    type = "admin";
                     Connection con = MyConnection.getConnection();
                     PreparedStatement ps;
-                    ps = con.prepareStatement("select * from admin where email =? and password =?");
-                    ps.setString(1, email);
+                    ps = con.prepareStatement("select * from account where username =? and password =? and acc_type =?");
+                    ps.setString(1, username);
                     ps.setString(2, password);
+                    ps.setString(3,type);
                     ResultSet rs = ps.executeQuery();
                     if(rs.next()){
                         AdminDashboard ad = new AdminDashboard();
@@ -310,7 +314,7 @@ public class login extends javax.swing.JFrame {
                         ad.pack();
                         this.dispose();
                     }else{
-                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                        JOptionPane.showMessageDialog(this, "Incorrect username or password", "Login Failed", 2);
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
@@ -341,14 +345,9 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        new signup().setVisible(true);
+        new signup_account().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        new ForgotPassword().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -391,7 +390,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
