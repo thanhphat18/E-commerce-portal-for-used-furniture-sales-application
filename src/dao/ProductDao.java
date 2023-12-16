@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -62,6 +64,30 @@ public class ProductDao {
             Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return value;
+    }
+    
+    //get categories data
+    public void getProductValue(JTable table, String search){
+        String sql = "select * from product where concat(pid,pname,cid) like ? order by pid";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%"+search+"%");
+            rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            Object[] row;
+            while(rs.next()){
+                row = new Object[6];
+                row[0] = rs.getInt(1);
+                row[1] = rs.getString(2);
+                row[2] = rs.getInt(3);
+                row[3] = rs.getInt(4);
+                row[4] = rs.getString(6);
+                row[5] = rs.getString(7);
+                model.addRow(row);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     //insert data into product table
