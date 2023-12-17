@@ -257,12 +257,13 @@ public class SellProduct extends javax.swing.JFrame {
             String img = jTextField1.getText();
             String cname = jComboBox1.getSelectedItem().toString();
             int cid = category.getCategoryId(cname);
-            int qty = Integer.parseInt(jTextField6.getText());
+            int qty = Integer.parseInt(jTextField5.getText());
+            String statusProduct = "Waiting";
             if(isNumeric(jTextField6.getText())){
                 double price = Double.parseDouble(jTextField6.getText());
                 if(!product.isIDExists(id)){
                     if(!product.isProCatExists(pname, cname)){
-                        product.insert(id, pname, cid, qty, price, sid, cname, img);
+                        product.insert(id, pname, cid, qty, price, sid, cname, img, statusProduct);
                         SellerDashboard.jButton3.setBackground(primaryColor);
                         this.dispose();
                     }else{

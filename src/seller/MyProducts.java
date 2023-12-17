@@ -7,6 +7,8 @@ package seller;
 import dao.ProductDao;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+import dao.SellerDao;
+import dao.AccountDao;
 
 /**
  *
@@ -16,7 +18,10 @@ public class MyProducts extends javax.swing.JFrame {
     
     ProductDao product = new ProductDao();
     Color primaryColor = new Color(255,255,255);
-    DefaultTableModel model = new DefaultTableModel(); 
+    DefaultTableModel model = new DefaultTableModel();
+    SellerDao seller = new SellerDao();
+    AccountDao acc = new AccountDao();
+    private int sid;
     /**
      * Creates new form MyDeliver
      */
@@ -53,11 +58,11 @@ public class MyProducts extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product ID", "Product Name", "Quantity", "Price", "Category", "Image"
+                "Product ID", "Product Name", "Quantity", "Price", "Category", "Image", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -143,11 +148,12 @@ public class MyProducts extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void init(){
+       sid = seller.getUserId(acc.getAccountId(SellerDashboard.userName.getText()));
        productTable();
     }
     
     private void productTable(){
-        product.getProductValue(jTable1,"");
+        product.getProductValueForSeller(jTable1,"", sid);
         model = (DefaultTableModel)jTable1.getModel();
         jTable1.setRowHeight(30);
         jTable1.setShowGrid(true);
@@ -163,8 +169,8 @@ public class MyProducts extends javax.swing.JFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         jTable1.setModel(new DefaultTableModel(null, new Object[]{"Product ID","Product Name", "Quantity", "Price", 
-            "Category", "Image"}));
-        product.getProductValue(jTable1, jTextField1.getText());
+            "Category", "Image","Status"}));
+        product.getProductValueForSeller(jTable1, jTextField1.getText(), sid);
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked

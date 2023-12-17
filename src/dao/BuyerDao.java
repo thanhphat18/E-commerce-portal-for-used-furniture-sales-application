@@ -95,4 +95,34 @@ public class BuyerDao {
         }
         return id;
     }
+    
+    public String getAddress(int id){
+        String address = "";
+        try{
+            ps = con.prepareStatement("select uaddress from buyer where bid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                address = rs.getString(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(BuyerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return address;
+    }
+    
+    public String getEmail(int id){
+        String email = "";
+        try{
+            ps = con.prepareStatement("select uemail from buyer where bid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                email = rs.getString(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(BuyerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return email;
+    }
 }
