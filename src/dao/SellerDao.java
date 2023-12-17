@@ -96,4 +96,20 @@ public class SellerDao {
         }
         return id;
     }
+    
+    //get seller name
+    public String getSellerName(int sid){
+        String name = "";
+        try{
+            ps = con.prepareStatement("select sname from seller where sid =?");
+            ps.setInt(1, sid);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                name = rs.getString(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(SellerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
 }

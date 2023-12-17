@@ -43,7 +43,7 @@ public class ProductDao {
     
     //get product values
     public String[] getProductValue(int pid, int cid, int sid){
-        String[] value = new String[8];
+        String[] value = new String[9];
         try{
             ps = con.prepareStatement("select * from product where pid =? and cid =? and sid =?");
             ps.setInt(1, pid);
@@ -59,6 +59,7 @@ public class ProductDao {
                 value[5] = rs.getString(6);
                 value[6] = rs.getString(7);
                 value[7] = rs.getString(8);
+                value[8] = rs.getString(9);
             }
         }catch (SQLException ex) {
             Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,9 +67,35 @@ public class ProductDao {
         return value;
     }
     
-    //get categories data
-    public void getProductValue(JTable table, String search){
-        String sql = "select * from product where concat(pid,pname,cid) like ? order by pid";
+    //get product data
+    public void getProductValueForSeller(JTable table, String search, int sid){
+        String sql = "select * from product where concat(pid,pname,cid) like ? and sid = ? order by pid";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%"+search+"%");
+            ps.setInt(2,sid);
+            rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            Object[] row;
+            while(rs.next()){
+                row = new Object[7];
+                row[0] = rs.getInt(1);
+                row[1] = rs.getString(2);
+                row[2] = rs.getInt(4);
+                row[3] = rs.getString(5);
+                row[4] = rs.getString(7);
+                row[5] = rs.getString(8);
+                row[6] = rs.getString(9);
+                model.addRow(row);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //get product data
+    public void getProductValueForAdmin(JTable table, String search){
+        String sql = "select * from product where concat(pid,pname,cname,sid) like ? order by statusProduct desc";
         try{
             ps = con.prepareStatement(sql);
             ps.setString(1, "%"+search+"%");
@@ -76,13 +103,41 @@ public class ProductDao {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             Object[] row;
             while(rs.next()){
-                row = new Object[6];
+                row = new Object[8];
                 row[0] = rs.getInt(1);
                 row[1] = rs.getString(2);
-                row[2] = rs.getInt(3);
+                row[2] = rs.getString(7);
                 row[3] = rs.getInt(4);
-                row[4] = rs.getString(6);
-                row[5] = rs.getString(7);
+                row[4] = rs.getDouble(5);
+                row[5] = rs.getString(6);
+                row[6] = rs.getString(8);
+                row[7] = rs.getString(9);
+                model.addRow(row);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //get product data
+    public void getProductValueForUser(JTable table, String search){
+        String sql = "select * from product where concat(pname,cname) like ? and statusProduct = 'Approved' order by pid";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%"+search+"%");
+            rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            Object[] row;
+            while(rs.next()){
+                row = new Object[7];
+                row[0] = rs.getInt(1);
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(7);
+                row[3] = rs.getInt(4);
+                row[4] = rs.getDouble(5);
+                row[5] = rs.getString(6);
+                row[6] = rs.getString(8);
+              
                 model.addRow(row);
             }
         }catch(SQLException ex){
@@ -91,8 +146,8 @@ public class ProductDao {
     }
     
     //insert data into product table
-    public void insert(int id, String pname, int cid, int pqty, double pprice, int sid, String cname, String img){
-        String sql = "insert into product values(?,?,?,?,?,?,?,?)";
+    public void insert(int id, String pname, int cid, int pqty, double pprice, int sid, String cname, String img, String status){
+        String sql = "insert into product values(?,?,?,?,?,?,?,?,?)";
         try{
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -103,6 +158,7 @@ public class ProductDao {
             ps.setInt(6,sid);
             ps.setString(7,cname);
             ps.setString(8, img);
+            ps.setString(9,status);
             
             if(ps.executeUpdate() > 0){
                 JOptionPane.showMessageDialog(null, "Completed");
@@ -176,5 +232,141 @@ public class ProductDao {
             Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return categories;
+    }
+    
+    //update price of product data
+    public void updatePrice(int id, double price){
+        String sql = "update product set pprice = ? where pid = ?";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setDouble(1, price);
+            ps.setInt(2,id);
+            if(ps.executeUpdate() > 0){
+                JOptionPane.showMessageDialog(null, "Price succesffuly updated");
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //update status of product data
+    public void updateStatus(int id, String status){
+        String sql = "update product set statusProduct = ? where pid = ?";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setInt(2,id);
+            if(ps.executeUpdate() > 0){
+                JOptionPane.showMessageDialog(null, "Updated status of product");
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    public void delete(int id){
+        String sql = "delete from product where pid = ?";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            if(ps.executeUpdate() > 0){
+                JOptionPane.showMessageDialog(null, "Completely deleted");
+            }
+            
+        }catch(SQLException ex){
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     public String getProductName(int id){
+        String pname = "";
+        try{
+            ps = con.prepareStatement("select pname from product where pid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                pname = rs.getString(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pname;
+    }
+     
+     public String getCategory(int id){
+        String cname = "";
+        try{
+            ps = con.prepareStatement("select cname from product where pid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                cname = rs.getString(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cname;
+    }
+     
+     public int getQuantity(int id){
+        int qty = 0;
+        try{
+            ps = con.prepareStatement("select pqty from product where pid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                qty = rs.getInt(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return qty;
+    }
+     
+     public double getPrice(int id){
+        double price = 0.0;
+        try{
+            ps = con.prepareStatement("select pprice from product where pid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                price = rs.getDouble(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return price;
+    }
+     
+     public String getStatusProduct(int id){
+        String status = "";
+        try{
+            ps = con.prepareStatement("select statusProduct from product where pid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                status = rs.getString(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+     
+     public int getSeller(int id){
+        int sid = 0;
+        try{
+            ps = con.prepareStatement("select sid from product where pid =?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                sid = rs.getInt(1);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sid;
     }
 }
